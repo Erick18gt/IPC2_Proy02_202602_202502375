@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="IPC2_Proy2/IPC2_Proy2.csproj" />
+  <Project Path="Proyecto2.Core/Proyecto2.Core.csproj" />
+  <Project Path="Proyecto2.TDA/Proyecto2.TDA.csproj" />
 </Solution>
