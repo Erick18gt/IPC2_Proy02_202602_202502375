@@ -1,10 +1,58 @@
-﻿@page
-@model IndexModel
+@page
+@model IPC2_Proy2.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Inicio";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Sistema de Catálogo de Librería</h1>
+    <p>Proyecto No. 2 - Introducción a la Programación y Computación 2</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Cargar archivo XML</h5>
+                <p class="card-text">Carga un archivo entrada.xml con categorías y/o libros.</p>
+                <a asp-page="/CargarXml" class="btn btn-primary">Ir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Categorías</h5>
+                <p class="card-text">Ver la estructura del catálogo o agregar una nueva categoría.</p>
+                <a asp-page="/Categorias" class="btn btn-primary">Ir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Libros</h5>
+                <p class="card-text">Registrar, eliminar o buscar libros del catálogo.</p>
+                <a asp-page="/Libros" class="btn btn-primary">Ir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Reporte gráfico (Graphviz)</h5>
+                <p class="card-text">Ver los libros de una categoría de forma gráfica.</p>
+                <a asp-page="/Graphviz" class="btn btn-primary">Ir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ayuda</h5>
+                <p class="card-text">Datos del estudiante y enlace a la documentación.</p>
+                <a asp-page="/Ayuda" class="btn btn-secondary">Ir</a>
+            </div>
+        </div>
+    </div>
 </div>

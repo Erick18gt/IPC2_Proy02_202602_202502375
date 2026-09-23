@@ -1,5 +1,6 @@
+using Proyecto2.Core;
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSingleton<Catalogo>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 

@@ -1,0 +1,24 @@
+@page
+@model IPC2_Proy2.Pages.CargarXmlModel
+@{
+    ViewData["Title"] = "Cargar XML";
+}
+
+<h2>Cargar archivo XML de entrada</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Selecciona el archivo entrada.xml</label>
+        <input type="file" class="form-control" asp-for="ArchivoXml" accept=".xml" />
+    </div>
+    <button type="submit" class="btn btn-primary">Cargar</button>
+</form>
+
+@if (Model.Mensaje != null)
+{
+    <div class="alert @(Model.Exito ? "alert-success" : "alert-danger") mt-3">
+        @Model.Mensaje
+    </div>
+}
+
+<a asp-page="/Index" class="btn btn-link mt-3">Volver al menú</a>

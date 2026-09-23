@@ -1,0 +1,32 @@
+@page
+@model IPC2_Proy2.Pages.CategoriasModel
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<h2>Estructura de categorías</h2>
+
+<pre class="border p-3 bg-light">@Model.Estructura</pre>
+
+<h3>Agregar nueva categoría</h3>
+
+<form method="post" asp-page-handler="Agregar">
+    <div class="mb-3">
+        <label class="form-label">Nombre de la categoría</label>
+        <input type="text" class="form-control" asp-for="NombreNuevaCategoria" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Categoría padre (dejar en blanco si es de nivel superior)</label>
+        <input type="text" class="form-control" asp-for="NombreCategoriaPadre" />
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+
+@if (Model.Mensaje != null)
+{
+    <div class="alert @(Model.Exito ? "alert-success" : "alert-danger") mt-3">
+        @Model.Mensaje
+    </div>
+}
+
+<a asp-page="/Index" class="btn btn-link mt-3">Volver al menú</a>
