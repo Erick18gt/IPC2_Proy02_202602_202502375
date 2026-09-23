@@ -1,19 +1,9 @@
 namespace Proyecto2.TDA
 {
-    // Tabla hash propia: permite buscar un libro por su ISBN sin tener
-    // que revisar uno por uno todos los libros del catálogo.
-    //
-    // Idea general: convertimos el ISBN en un número de "casilla" (índice
-    // de un array), y guardamos el libro directamente ahí. Buscar es
-    // entonces: calcular la casilla, ir directo a ella. Rápido, aunque
-    // el catálogo crezca mucho.
+    
     public class TablaHash
     {
-        // Un array nativo de C# SÍ está permitido (new NodoLibro[tamano]).
-        // Lo que está prohibido son las colecciones ya armadas como
-        // List, Dictionary, Queue, Stack. Un array es solo un bloque de
-        // memoria contiguo; toda la lógica de qué hacer con él la
-        // programamos nosotros.
+        
         private NodoLibro[] casillas;
         private int tamano;
 
@@ -23,8 +13,6 @@ namespace Proyecto2.TDA
             casillas = new NodoLibro[tamano]; // reservamos el array de casillas, todas empiezan en null
         }
 
-        // Función hash: convierte cualquier ISBN en un índice válido (0 a tamano-1).
-        // Ejemplo: si tamano = 100 y isbn = 4051, entonces 4051 % 100 = 51.
         private int Hash(int isbn)
         {
             int pos = isbn % tamano;
@@ -32,10 +20,7 @@ namespace Proyecto2.TDA
             return pos;
         }
 
-        // Inserta un libro. Como dos ISBN distintos pueden caer en la misma
-        // casilla (esto se llama "colisión"), cada casilla en realidad guarda
-        // una LISTA ENLAZADA de libros, no solo uno. Insertamos siempre al
-        // inicio de esa lista (es lo más simple y rápido: O(1)).
+        // Inserta un libro. 
         public void Insertar(Libro libro)
         {
             int pos = Hash(libro.ISBN);
@@ -45,7 +30,7 @@ namespace Proyecto2.TDA
         }
 
         // Busca un libro por ISBN. Va directo a la casilla correspondiente
-        // y solo recorre esa lista pequeña (normalmente 0 o 1 elementos).
+        // y solo recorre esa lista pequeña 
         public Libro Buscar(int isbn)
         {
             int pos = Hash(isbn);
@@ -58,7 +43,7 @@ namespace Proyecto2.TDA
                 actual = actual.Siguiente; // seguimos a la siguiente cajita de esa casilla
             }
 
-            return null; // recorrimos toda la lista de esa casilla y no estaba
+            return null; 
         }
 
         // Elimina un libro por ISBN. Devuelve true si lo encontró y lo quitó.
@@ -66,7 +51,7 @@ namespace Proyecto2.TDA
         {
             int pos = Hash(isbn);
             NodoLibro actual = casillas[pos];
-            NodoLibro anterior = null; // vamos a necesitar "el de atrás" para reconectar la cadena
+            NodoLibro anterior = null; 
 
             while (actual != null)
             {
@@ -89,13 +74,10 @@ namespace Proyecto2.TDA
                 actual = actual.Siguiente;
             }
 
-            return false; // no se encontró ese ISBN
+            return false; 
         }
 
-        // Recorre TODAS las casillas de la tabla y arma una sola lista
-        // enlazada nueva, con los libros ordenados ascendentemente por ISBN.
-        // La construimos insertando cada libro en su posición correcta
-        // (como "insertion sort", pero sobre una lista enlazada).
+       
         public NodoLibro ObtenerTodosOrdenadosPorIsbn()
         {
             NodoLibro cabezaOrdenada = null;
@@ -113,8 +95,7 @@ namespace Proyecto2.TDA
             return cabezaOrdenada;
         }
 
-        // Inserta 'libro' dentro de una lista que ya está ordenada,
-        // en la posición que le corresponde por ISBN.
+        
         private NodoLibro InsertarOrdenado(NodoLibro cabeza, Libro libro)
         {
             NodoLibro nuevo = new NodoLibro(libro);

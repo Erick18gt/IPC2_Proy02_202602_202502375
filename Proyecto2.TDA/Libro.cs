@@ -1,8 +1,6 @@
 namespace Proyecto2.TDA
 {
-    // Clase de datos simple: representa un libro. Esto es POO normal
-    // (una clase con atributos), NO es una "estructura de datos" de C#,
-    // así que sí está permitida sin problema.
+  
     public class Libro
     {
         public int ISBN;
