@@ -1,9 +1,6 @@
 namespace Proyecto2.TDA
 {
-    // Árbol N-ario: organiza las categorías y subcategorías del catálogo,
-    // igual que las secciones de una biblioteca física o las carpetas
-    // de una computadora (una carpeta contiene subcarpetas, que contienen
-    // subcarpetas, etc).
+    
     public class ArbolCategorias
     {
         private NodoCategoria raiz;
@@ -12,8 +9,7 @@ namespace Proyecto2.TDA
         public NodoCategoria Raiz => raiz;
 
         // Busca un nodo por nombre en TODO el árbol.
-        // Es un recorrido recursivo: primero baja por los hijos,
-        // y si no encuentra nada, sigue por los hermanos.
+        
         public NodoCategoria Buscar(string nombre)
         {
             return BuscarDesde(raiz, nombre);
@@ -32,10 +28,7 @@ namespace Proyecto2.TDA
             return BuscarDesde(nodo.SiguienteHermano, nombre);
         }
 
-        // Agrega una categoría nueva. Si nombrePadre es null, se agrega
-        // como categoría de nivel superior (sin padre).
-        // Devuelve false si el nombre ya existe (deben ser únicos) o si
-        // el padre indicado no se encontró.
+        // Agrega una categoría nueva. 
         public bool AgregarCategoria(string nombre, string nombrePadre)
         {
             if (Buscar(nombre) != null)
@@ -64,11 +57,6 @@ namespace Proyecto2.TDA
             return true;
         }
 
-        // Inserta 'nuevo' dentro de la cadena de hermanos que arranca en
-        // 'cabezaHermanos', manteniendo orden alfabético (el enunciado
-        // pide que las categorías se muestren ordenadas alfabéticamente).
-        // Usamos 'ref' porque necesitamos poder CAMBIAR cuál es la cabeza
-        // de la cadena si el nuevo nodo debe quedar de primero.
         private void InsertarOrdenadoEntreHermanos(ref NodoCategoria cabezaHermanos, NodoCategoria nuevo)
         {
             if (cabezaHermanos == null || string.Compare(nuevo.Nombre, cabezaHermanos.Nombre) < 0)
@@ -88,8 +76,7 @@ namespace Proyecto2.TDA
             actual.SiguienteHermano = nuevo;
         }
 
-        // Agrega un libro a la categoría indicada, dejando la lista de
-        // libros de esa categoría ordenada ascendentemente por ISBN.
+      
         public bool AgregarLibroACategoria(string nombreCategoria, Libro libro)
         {
             NodoCategoria categoria = Buscar(nombreCategoria);
@@ -119,10 +106,7 @@ namespace Proyecto2.TDA
             return cabeza;
         }
 
-        // Devuelve un texto con la estructura completa del árbol (o desde
-        // una subcategoría específica si se indica 'nombreInicio'), con
-        // sangría según el nivel de profundidad. Pensado para mostrarlo
-        // tal cual en una página Razor dentro de un <pre>.
+       
         public string MostrarEstructura(string nombreInicio = null)
         {
             NodoCategoria inicio = nombreInicio == null ? raiz : Buscar(nombreInicio);
@@ -141,8 +125,7 @@ namespace Proyecto2.TDA
             return texto;
         }
 
-        // Arma el espacio de sangría "a mano", con un ciclo, en vez de
-        // usar new string(' ', n) (que por dentro usa un array de char).
+        
         private string ObtenerSangria(int nivel)
         {
             string sangria = "";

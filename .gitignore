@@ -480,3 +480,5 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+IPC2_Proy2/wwwroot/temp/*
+IPC2_Proy2/wwwroot/graficos/*

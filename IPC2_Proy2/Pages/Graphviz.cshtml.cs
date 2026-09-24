@@ -32,20 +32,31 @@ namespace IPC2_Proy2.Pages
             Directory.CreateDirectory(carpetaGraficos);
 
             GeneradorGraphviz generador = new GeneradorGraphviz();
-            string rutaFisica = generador.GenerarImagenDeCategoria(catalogo, NombreCategoria.Trim(), carpetaGraficos);
 
-            if (rutaFisica == null)
+            try
             {
-                Mensaje = "No se encontró esa categoría.";
-                return;
+                string rutaFisica = generador.GenerarImagenDeCategoria(catalogo, NombreCategoria.Trim(), carpetaGraficos);
+
+                if (rutaFisica == null)
+                {
+                    Mensaje = "No se encontró esa categoría.";
+                    return;
+                }
+
+                string nombreArchivo = Path.GetFileName(rutaFisica);
+
+                // Agregamos un valor único al final de la URL para que el
+                // navegador no muestre una imagen vieja guardada en caché
+                // con el mismo nombre de archivo.
+                RutaImagen = "/graficos/" + nombreArchivo + "?v=" + DateTime.Now.Ticks;
             }
-
-            string nombreArchivo = Path.GetFileName(rutaFisica);
-
-            // Agregamos un valor único al final de la URL para que el
-            // navegador no muestre una imagen vieja guardada en caché
-            // con el mismo nombre de archivo.
-            RutaImagen = "/graficos/" + nombreArchivo + "?v=" + DateTime.Now.Ticks;
+            catch (Exception ex)
+            {
+                // Si Graphviz no está instalado o algo falla al generar la
+                // imagen, mostramos el motivo en la página en vez de que
+                // la aplicación se caiga con una excepción sin controlar.
+                Mensaje = ex.Message;
+            }
         }
     }
 }

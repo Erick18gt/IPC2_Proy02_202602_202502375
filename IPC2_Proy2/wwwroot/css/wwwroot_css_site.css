@@ -1,0 +1,26 @@
+/* Color de fondo del menú de navegación: un degradado azul-morado */
+.bg-catalogo {
+    background: linear-gradient(90deg, #2b4c7e 0%, #5c3d8f 100%);
+}
+
+/* Un poco de animación suave al pasar el mouse sobre las tarjetas del menú */
+.card {
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-width: 2px;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Un poco más de aire en el título principal */
+h1.display-4 {
+    color: #2b4c7e;
+}
+
+/* Que los bloques de texto (estructura de categorías, etc.) se vean más suaves */
+pre {
+    border-radius: 8px;
+    background-color: #f4f6fa !important;
+}

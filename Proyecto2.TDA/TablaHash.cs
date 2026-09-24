@@ -1,10 +1,6 @@
 namespace Proyecto2.TDA
 {
-    // Tabla hash propia: permite buscar un libro por ISBN sin revisar
-    // uno por uno todos los libros. Antes usábamos un array de C# para
-    // las casillas; ahora las casillas son una LISTA ENLAZADA de
-    // NodoCasilla, construida una sola vez en el constructor con un
-    // tamaño fijo. No usamos [] en ningún lado de esta clase.
+   
     public class TablaHash
     {
         private NodoCasilla primeraCasilla; // cabeza de la cadena de casillas
@@ -16,8 +12,6 @@ namespace Proyecto2.TDA
             ConstruirCasillas();
         }
 
-        // Crea 'tamano' nodos NodoCasilla y los encadena uno tras otro.
-        // Esto se hace UNA sola vez, al crear la tabla.
         private void ConstruirCasillas()
         {
             NodoCasilla anterior = null;
@@ -35,10 +29,7 @@ namespace Proyecto2.TDA
             }
         }
 
-        // Recorre la cadena de casillas 'indice' pasos, para llegar a la
-        // casilla que le corresponde a un ISBN. Como el tamaño de la tabla
-        // es fijo (no crece), este recorrido siempre es como máximo
-        // 'tamano' pasos, sin importar cuántos libros haya en el catálogo.
+      
         private NodoCasilla ObtenerCasilla(int indice)
         {
             NodoCasilla actual = primeraCasilla;
@@ -53,7 +44,7 @@ namespace Proyecto2.TDA
             return actual;
         }
 
-        // Función hash: convierte el ISBN en un índice válido (0 a tamano-1).
+        // Función hash: convierte el ISBN en un índice válido
         private int Hash(int isbn)
         {
             int pos = isbn % tamano;
@@ -73,7 +64,7 @@ namespace Proyecto2.TDA
         }
 
         // Busca un libro por ISBN: va a su casilla y recorre solo esa
-        // lista pequeña (normalmente 0 o 1 elementos).
+        // lista pequeña 
         public Libro Buscar(int isbn)
         {
             int pos = Hash(isbn);
@@ -116,9 +107,7 @@ namespace Proyecto2.TDA
             return false;
         }
 
-        // Recorre TODAS las casillas (siguiendo la cadena de NodoCasilla)
-        // y arma una sola lista enlazada con los libros ordenados
-        // ascendentemente por ISBN.
+       
         public NodoLibro ObtenerTodosOrdenadosPorIsbn()
         {
             NodoLibro cabezaOrdenada = null;
