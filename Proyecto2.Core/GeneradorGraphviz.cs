@@ -11,8 +11,12 @@ namespace Proyecto2.Core
     // una imagen .png que la página Razor pueda mostrar.
     public class GeneradorGraphviz
     {
-        // Genera la imagen y devuelve la ruta del archivo .png ya creado
-        // (o null si la categoría no existe).
+        // Genera la imagen y devuelve la ruta del archivo .svg ya creado
+        // (o null si la categoría no existe). Usamos SVG en vez de PNG
+        // porque es un formato VECTORIAL: no pierde nitidez al hacer zoom,
+        // sin importar si el catálogo tiene 3 libros o 10,000. Un PNG, en
+        // cambio, se genera a un tamaño fijo de píxeles y se ve borroso o
+        // gigante según cuántos nodos tenga el árbol.
         public string GenerarImagenDeCategoria(Catalogo catalogo, string nombreCategoria, string carpetaSalida)
         {
             NodoCategoria categoria = catalogo.BuscarCategoria(nombreCategoria);
@@ -23,12 +27,12 @@ namespace Proyecto2.Core
 
             string nombreArchivo = "grafico_" + nombreCategoria.Replace(" ", "_");
             string rutaDot = Path.Combine(carpetaSalida, nombreArchivo + ".dot");
-            string rutaPng = Path.Combine(carpetaSalida, nombreArchivo + ".png");
+            string rutaSvg = Path.Combine(carpetaSalida, nombreArchivo + ".svg");
 
             File.WriteAllText(rutaDot, textoDot);
-            EjecutarDot(rutaDot, rutaPng);
+            EjecutarDot(rutaDot, rutaSvg);
 
-            return rutaPng;
+            return rutaSvg;
         }
 
         // Arma el texto en formato DOT (el lenguaje de Graphviz), recorriendo
@@ -88,13 +92,13 @@ namespace Proyecto2.Core
         }
 
         // Ejecuta el programa externo 'dot' pasándole el archivo .dot y
-        // pidiéndole que genere un .png. Esto solo funciona si Graphviz
-        // está instalado y 'dot' está agregado al PATH del sistema.
-        private void EjecutarDot(string rutaDot, string rutaPng)
+        // pidiéndole que genere un .svg (-Tsvg). Esto solo funciona si
+        // Graphviz está instalado y 'dot' está agregado al PATH del sistema.
+        private void EjecutarDot(string rutaDot, string rutaSvg)
         {
             ProcessStartInfo info = new ProcessStartInfo();
             info.FileName = "dot";
-            info.Arguments = "-Tpng \"" + rutaDot + "\" -o \"" + rutaPng + "\"";
+            info.Arguments = "-Tsvg \"" + rutaDot + "\" -o \"" + rutaSvg + "\"";
             info.UseShellExecute = false;
             info.CreateNoWindow = true;
 
